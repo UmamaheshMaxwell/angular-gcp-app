@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  tycho-angular:
+    container_name: angular-gcp-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4200:80
+    volumes:
+      - .:/app
+      - /app/node_modules
