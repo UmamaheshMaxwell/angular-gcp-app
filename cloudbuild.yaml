@@ -18,7 +18,7 @@ steps:
      - ${_SERVICE_NAME}
      - --allow-unauthenticated
      - --image=gcr.io/${PROJECT_ID}/${_SERVICE_NAME}:${COMMIT_SHA}
-     - --port=8080
+     - --port=4200
      - --region=${_REGION}
 
 # Here are the substitution variables related to the services.
