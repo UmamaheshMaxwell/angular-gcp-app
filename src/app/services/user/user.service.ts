@@ -16,7 +16,8 @@ export class UserService {
     return this.http.get<any>(`${this.apiUrl}/`);
   }
   
-  getUsers(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/users`);
+  getUsers(token:any): Observable<any> {
+    const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+    return this.http.get<any>(`${this.apiUrl}/users`, {headers});
   }
 }

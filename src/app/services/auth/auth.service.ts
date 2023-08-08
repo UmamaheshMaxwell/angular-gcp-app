@@ -10,10 +10,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getIdentityToken(): Observable<string> {
+  getIdentityToken(): Observable<any> {
     const headers = new HttpHeaders({'Metadata-Flavor': 'Google'});
     const url = `http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=${this.audience}`;
-    return this.http.get(url, { headers, responseType: 'text' });
+    return this.http.get(url, { headers });
   }
 }
 
