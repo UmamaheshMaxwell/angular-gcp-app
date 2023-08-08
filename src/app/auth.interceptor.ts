@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor}  from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { AuthService } from './services/auth/auth.service';
+import { GoogleAuthService } from './services/auth/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: GoogleAuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return from(this.authService.getIdentityToken()).pipe(
+    return from(this.authService.requestToken()).pipe(
       switchMap(token => {
         const authRequest = request.clone({
           setHeaders: {

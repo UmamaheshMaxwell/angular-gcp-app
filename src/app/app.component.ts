@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from './services/user/user.service';
-import { AuthService } from './services/auth/auth.service';
+import { GoogleAuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +12,12 @@ export class AppComponent {
   users: any;
 
   constructor(private userService: UserService, 
-              private authService: AuthService){
+              private authService: GoogleAuthService){
 
   }
 
   ngOnInit() {
-      this.authService.getIdentityToken().subscribe(token=> console.log(`token : ${token}`))
+      this.authService.requestToken().then(token => console.log(`token : ${token}`))
       this.userService.getUsers().subscribe((data) => {this.users = data;});
   }
 }

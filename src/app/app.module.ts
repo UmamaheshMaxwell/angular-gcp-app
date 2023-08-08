@@ -4,7 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthService } from './services/auth/auth.service';
+import { GoogleAuthService } from './services/auth/auth.service';
 import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { AuthInterceptor } from './auth.interceptor';
     //   useClass: AuthInterceptor,
     //   multi: true
     // },
-     AuthService
+    GoogleAuthService
   ],
   bootstrap: [AppComponent]
 })
