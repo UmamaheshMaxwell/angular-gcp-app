@@ -17,7 +17,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-      this.authService.getIdentityToken().then(token=> console.log(`token : ${token}`))
+      this.authService.getIdentityToken().subscribe(token=> console.log(`token : ${token}`))
       this.userService.getUsers().subscribe((data) => {this.users = data;});
   }
 }
