@@ -1,35 +1,19 @@
 import { Injectable } from '@angular/core';
-import { GoogleAuth } from 'google-auth-library';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
     url = 'https://node-gcp-service-3imv474m7a-uc.a.run.app/';
-    targetAudience = 'https://angular-gcp-service-3imv474m7a-uc.a.run.app';
+    audience = 'https://angular-gcp-service-3imv474m7a-uc.a.run.app';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  async getGoogleSignedIdToken() {
-    try {
-      // Create a new GoogleAuth instance
-      const auth = new GoogleAuth();
-  
-      // Obtain the default credentials
-      const client = await auth.getIdTokenClient(this.targetAudience);
-  
-      // Get the ID token
-      const res = await client.request({
-        url: this.url,
-        method: 'GET',
-      });
-  
-      // Extract the ID token from the response
-      const idToken = res.data;
-      console.log(idToken)
-      return idToken;
-    } catch (err:any) {
-      console.error('Error generating ID token:', err.message);
-      return null;
-    }
+  getIdentityToken(): Observable<string> {
+    const headers = new HttpHeaders({'Metadata-Flavor': 'Google'});
+    const url = `http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=${this.audience}`;
+    return this.http.get(url, { headers, responseType: 'text' });
   }
 }
 
