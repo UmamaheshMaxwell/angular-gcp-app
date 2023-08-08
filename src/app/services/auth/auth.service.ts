@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -10,10 +8,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getIdentityToken(): Observable<any> {
-    const headers = new HttpHeaders({'Metadata-Flavor': 'Google'});
-    const url = `http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=${this.audience}`;
-    return this.http.get(url, { headers });
+  async getIdentityToken(): Promise<any> {
+      const headers = new HttpHeaders({ 'Metadata-Flavor': 'Google' });
+      const url = `http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=${this.audience}`
+      return await this.http.get(url, { headers }).toPromise();
   }
 }
 

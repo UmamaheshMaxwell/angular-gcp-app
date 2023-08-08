@@ -11,16 +11,14 @@ export class AppComponent {
   title = 'Angular Gcp App';
   users: any;
 
-  constructor(private userService: UserService, private authService: AuthService){}
+  constructor(private userService: UserService, 
+              private authService: AuthService){
+
+  }
 
   ngOnInit() {
-    this.authService.getIdentityToken().subscribe(token => {
-      console.log(`token ${token}`)
-      this.userService.getUsers(token).subscribe((data) => {
-        this.users = data;
-      });
-    })
-
+      this.authService.getIdentityToken().then(token=> console.log(`token : ${token}`))
+      this.userService.getUsers().subscribe((data) => {this.users = data;});
   }
 }
 
