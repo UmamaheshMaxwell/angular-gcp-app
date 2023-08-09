@@ -17,12 +17,12 @@ import { AuthInterceptor } from './auth.interceptor';
     HttpClientModule
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptor,
-    //   multi: true
-    // },
-    GoogleAuthService
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+      deps: [GoogleAuthService]
+    }
   ],
   bootstrap: [AppComponent]
 })
