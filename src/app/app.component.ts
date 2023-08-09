@@ -30,7 +30,7 @@ export class AppComponent {
   fetchUsers() {
     this.userService.getUsers().then((response) => {
       console.log(response)
-      this.users=response
+      this.users=response.data
     }).catch(error => console.log(error));
   }
 }
