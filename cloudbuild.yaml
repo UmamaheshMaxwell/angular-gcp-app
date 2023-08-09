@@ -18,6 +18,7 @@ steps:
      - ${_SERVICE_NAME}
      - --allow-unauthenticated
      - --image=gcr.io/${PROJECT_ID}/${_SERVICE_NAME}:${COMMIT_SHA}
+     - --vpc-connector=sqlconnect
      - --port=80
      - --region=${_REGION}
 
